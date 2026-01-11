@@ -1,0 +1,22 @@
+# https://github.com/d7dsem/graia.git
+# --- build artifacts (any build*) ---
+/build*/
+/**/build*/
+# --- tooling noise ---
+wd/
+*.log
+
+# --- Python garbage ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.pytype/
+.venv/
+venv/
+
+
