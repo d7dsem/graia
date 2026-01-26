@@ -48,11 +48,11 @@ struct Options {
     // Parse command line arguments. Throw ecxeption on BAD params.
     void parse_cli(int argc, char** argv)
     {
-        if ( std::string(argv[1]) == "-h" || std::string(argv[1])=="--help")
-        {
-            _usage(argv[0], std::cout);
-            return;            
-        }
+        // if ( std::string(argv[1]) == "-h" || std::string(argv[1])=="--help")
+        // {
+        //     _usage(argv[0], std::cout);
+        //     return;            
+        // }
         try{
 
         }

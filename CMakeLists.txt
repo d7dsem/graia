@@ -29,6 +29,8 @@ endif()
 
 # Linux: pthread (якщо потрібно в майбутньому)
 if(UNIX AND NOT APPLE)
+    # Threads for atomic/signal on Unix
+    find_package(Threads REQUIRED)
     target_link_libraries(graia_capture PRIVATE pthread)
 endif()
 
@@ -37,20 +39,6 @@ set_target_properties(graia_capture PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
-add_executable(graia_capture_tst
-    source/graia_capture.cpp
-    source/file_rotation.cpp
-    source/splice_engine.cpp
-)
-target_link_libraries(graia_capture_tst PRIVATE
-    data_stream
-)
-
-if(UNIX)
-    # Threads for atomic/signal on Unix
-    find_package(Threads REQUIRED)
-    target_link_libraries(graia_capture_tst PRIVATE Threads::Threads)
-endif()
 
 # Force colored output for Ninja + GCC/Clang
 if(CMAKE_GENERATOR STREQUAL "Ninja")

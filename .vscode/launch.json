@@ -4,41 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-       {
-            "name": "Debug Capt test",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/wd/graia_capture_tst.exe",
-            "args": [
-                "-f", "1230000000", "--output-dir", "./captured",
-                "--limit", "10G" ,
-                "--file-size", "0.5G",
-                "--src", "enp1s0f0np0:192.168.30.3:58423",
-                // -f 428000000 --output-dir /data/captured --file-size 0.5G --src enp3s0fp0:192.168.30.3:50000 --limit 10G 
-            ],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/wd",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerPath": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "Build SR test",
-            "windows": {
-                "program": "${workspaceFolder}/wd/test_sock_reader.exe"
-            },
-            "linux": {
-                "program": "${workspaceFolder}/wd/test_sock_reader",
-                "MIMode": "gdb"
-            }
-        },
-{
+        {
             "name": "Debug graia_capture",
             "type": "cppdbg",
             "request": "launch",
