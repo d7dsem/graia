@@ -37,7 +37,39 @@
                 "program": "${workspaceFolder}/wd/test_sock_reader",
                 "MIMode": "gdb"
             }
-        },        
+        },
+{
+            "name": "Debug graia_capture",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/wd/graia_capture.exe",
+            "args": [
+                "-m", "0",
+                "-f", "428000000",
+                "--src", "enp3s0fp0:192.168.30.3:9999",
+                "--output-dir", "${workspaceFolder}/wd/captured",
+                "--file-size", "15M",
+                "--limit", "100M"
+            ],
+            "cwd": "${workspaceFolder}/wd",
+            "preLaunchTask": "Build graia_capture",
+            "stopAtEntry": false,
+            "externalConsole": false,
+            "windows": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "gdb.exe"
+            },
+            "linux": {
+                "MIMode": "gdb"
+            },
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }, 
         {
             "name": "Python Debugger: Current File",
             "type": "debugpy",

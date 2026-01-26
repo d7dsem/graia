@@ -2,8 +2,11 @@
 # --- build artifacts (any build*) ---
 /build*/
 /**/build*/
-# --- tooling noise ---
+
 wd/
+bin/
+# --- tooling noise ---
+
 *.log
 
 # --- Python garbage ---

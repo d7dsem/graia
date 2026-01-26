@@ -6,7 +6,7 @@ set "PROJECT_ROOT=%SCRIPT_DIR%.."
 
 :: === Defaults ===
 set "BUILD_TYPE=Debug"
-set "TARGET=test_file_reader"
+set "TARGET=graia_capture"
 set "WD_DIR=%PROJECT_ROOT%\wd"
 
 :: Manual compiler setup
@@ -46,7 +46,7 @@ if /i not "%BUILD_TYPE%"=="Debug" if /i not "%BUILD_TYPE%"=="Release" (
 
 :: If you use a specific generator, set it here
 :: Generator for mingw/msys2 environment
-::set "GEN=-G "Unix Makefiles""
+:: set "GEN=-G "Unix Makefiles""
 :: Require env coretly seted up
 set "GEN=-G Ninja"
 

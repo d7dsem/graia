@@ -12,12 +12,30 @@ GRAIA не використовує fallback mechanisms — кожен комп�
 Benchmark failed через недостатній traffic → operator must provide test stream.
 Hardware changed → re-run benchmark and rebuild.
 
+## Architecture: Capture Variants
+
+**CURRENT (Development):** Userspace recv() baseline
+- Використовується для відпрацювання file rotation, CLI, testing infrastructure
+- Обмеження: копіює дані через userspace (нижчий throughput)
+
+**ALTERNATIVE (Evaluation):** AF_PACKET + PACKET_MMAP
+- Zero-copy capture через ring buffer в kernel space
+- Userspace читає packets через mmap() без копіювання
+- Trade-off: runtime visibility пакетів vs splice максимальний throughput
+- Може бути обраний як production variant залежно від requirements balance
+
+**TARGET (Production):** Splice-Based Zero-Copy [описано нижче]
+
+Якщо тести на реальному залізі покуазують прийнятність більш простого варіанту зупиняємось на ньому.
+
+
 ## Architecture: Splice-Based Zero-Copy
 
 Capture engine використовує Linux `splice()` syscall для zero-copy transfer: socket → pipe → file повністю в kernel space без userspace memcpy.
 Це дає максимальну пропускну здатність (~95% wire speed) при мінімальному CPU overhead (2-3%).
 Trade-off: headers (Ethernet 14B + IP 20B + UDP 8B = 42B) залишаються у raw files — вирізаються post-facto утилітою `graia_pp_captured`.
 Альтернатива userspace runtime processing зменшує throughput на ~10% але дає runtime контроль.
+
 
 ## File Rotation
 
@@ -155,13 +173,13 @@ graia_build_capt.sh -i graia_forge_config_<YYYY-MM-DD>.json -o graia_capture_<ta
 
 # Stage 4: Live-Capture
 # (frequencies from _stream_ctx.json example)
-graia_capture_tst -f 428000000 --output-dir path/to/captured --file-size 1G --src enp3s0fp0:192.168.30.3:50000 --limit 10G &
+graia_capture_tst -m 0 -f 428000000 --output-dir /data/captured --file-size 1G --src enp3s0fp0:192.168.30.3:50000 --limit 10G &
 
-graia_capture_tst -f 452000000 --output-dir path/to/captured --file-size 1G --src enp3s0fp0:192.168.30.3:46000 --limit 10G &
+graia_capture_tst -m 1 -f 452000000 --output-dir /data/captured --file-size 1G --src enp3s0fp0:192.168.30.3:46000 --limit 10G &
 
-graia_capture_tst -f 484000000 --output-dir path/to/captured --file-size 1G --src enp3s1fp1:192.168.40.3:49000 --limit 10G &
+graia_capture_tst -m 2 -f 484000000 --output-dir /data/captured --file-size 1G --src enp3s1fp1:192.168.40.3:49000 --limit 10G &
 
-graia_capture_tst -f 516000000 --output-dir path/to/captured --file-size 1G --src enp3s1fp1:192.168.40.3:38000 --limit 10G &
+graia_capture_tst -m 3 -f 516000000 --output-dir /data/captured --file-size 1G --src enp3s1fp1:192.168.40.3:38000 --limit 10G &
 
 wait  # Wait for all captures to complete
 
