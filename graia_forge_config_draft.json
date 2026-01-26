@@ -1,0 +1,23 @@
+{
+    "timestamp": "2026-01-12",
+    "compile_time": {
+        "rotation_size": "1024MiB",
+        "io_block_size_mb": "4MiB"
+    },
+    "run_time": {
+        "cpu_affinity": [0, 1, 2, 3],
+        "pipe_buffer_size": "4MiB",        
+        "socket_rcv_buffer_size": "4MiB",
+        "packet_rx_ring_slots" : 10
+    },
+  
+    "hardware_context": {
+        "cpu_cores": 4,
+        "numa_nodes": 1,
+        "disk_type": "SSD/NVMe",
+        "disk_scheduler": "mq-deadline",
+        "pipe_buffer_size_max": "1MiB",
+        "socket_rcv_buffer_size_max" : "1MiB",
+        "packet_rx_ring_slots_max": 1
+    }
+}

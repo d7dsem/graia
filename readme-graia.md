@@ -133,7 +133,7 @@ Rotation size оптимізується під конкретне залізо 
          │    live-capture   │
          └────────┬──────────┘
                   ↓
-            /data/captured/graia_stream_*.raw
+            path/to/captured/graia_stream_*.raw
                   ↓
          ┌───────────────────┐
          │   PostProcessing  │
@@ -155,18 +155,18 @@ graia_build_capt.sh -i graia_forge_config_<YYYY-MM-DD>.json -o graia_capture_<ta
 
 # Stage 4: Live-Capture
 # (frequencies from _stream_ctx.json example)
-graia_capture_tst -f 428000000 --output-dir /data/captured --file-size 1G --src enp3s0fp0:192.168.30.3:50000 --limit 10G &
+graia_capture_tst -f 428000000 --output-dir path/to/captured --file-size 1G --src enp3s0fp0:192.168.30.3:50000 --limit 10G &
 
-graia_capture_tst -f 452000000 --output-dir /data/captured --file-size 1G --src enp3s0fp0:192.168.30.3:46000 --limit 10G &
+graia_capture_tst -f 452000000 --output-dir path/to/captured --file-size 1G --src enp3s0fp0:192.168.30.3:46000 --limit 10G &
 
-graia_capture_tst -f 484000000 --output-dir /data/captured --file-size 1G --src enp3s1fp1:192.168.40.3:49000 --limit 10G &
+graia_capture_tst -f 484000000 --output-dir path/to/captured --file-size 1G --src enp3s1fp1:192.168.40.3:49000 --limit 10G &
 
-graia_capture_tst -f 516000000 --output-dir /data/captured --file-size 1G --src enp3s1fp1:192.168.40.3:38000 --limit 10G &
+graia_capture_tst -f 516000000 --output-dir path/to/captured --file-size 1G --src enp3s1fp1:192.168.40.3:38000 --limit 10G &
 
 wait  # Wait for all captures to complete
 
 # Stage 5: Post-Procesing - Gap-Analize + [optional]Strip headrs
-for f in  /data/captured/graia_stream_452000000_*.raw; do
+for f in  path/to/captured/graia_stream_452000000_*.raw; do
     graia_pp_captured -i "$f" --out-dir /data/payload --rem-capt
 done
 
@@ -222,7 +222,7 @@ Build script компілює optimized binary з параметрами з forg
 Виконує запис даних у файли.
 
 Принцип неймнігу
-`/data/captured/graia_stream_{freq_hz}_{timestamp}_{sequence}.raw`
+`path/to/captured/graia_stream_{freq_hz}_{timestamp}_{sequence}.raw`
 
 Де:
 - {freq_hz}   = Macro chan freq
@@ -231,9 +231,9 @@ Build script компілює optimized binary з параметрами з forg
 
 **Приклад:**
 ```bash
-/data/captured/graia_stream_452000000_2025-01-10_21-30-00_0001.raw
-/data/captured/graia_stream_452000000_2025-01-10_21-30-00_0002.raw  # after rotation
-/data/captured/graia_stream_428000000_2025-01-10_21-30-00_0001.raw  # different macro-channel
+path/to/captured/graia_stream_452000000_2025-01-10_21-30-00_0001.raw
+path/to/captured/graia_stream_452000000_2025-01-10_21-30-00_0002.raw  # after rotation
+path/to/captured/graia_stream_428000000_2025-01-10_21-30-00_0001.raw  # different macro-channel
 ```
 
 
@@ -284,11 +284,11 @@ done
 
 ```bash
 # Gap analysis без видалення файлу
-for f in /data/captured/graia_stream_*.raw; do
+for f in path/to/captured/graia_stream_*.raw; do
     graia_pp_captured -i "$f"
 done
 
 # Для тестових прогонів (з видаленням)
-for f in /data/captured/graia_stream_*.raw; do
+for f in path/to/captured/graia_stream_*.raw; do
     graia_pp_captured -i "$f" --rem-capt
 done

@@ -1,0 +1,92 @@
+{
+  "timestamp": "2026-01-21 08:38:29",
+  "nics": {
+    "enp3s0fp0": {
+      "interface": "enp3s0fp0",
+      "rx_ring_max": null,
+      "rx_ring_current": null,
+      "offloads": null,
+      "speed": null
+    },
+    "enp3s1fp1": {
+      "interface": "enp3s1fp1",
+      "rx_ring_max": null,
+      "rx_ring_current": null,
+      "offloads": null,
+      "speed": null
+    }
+  },
+  "cpu": {
+    "cores": [
+      {
+        "cpu": 0,
+        "core": 0,
+        "socket": 0,
+        "numa_node": 0
+      },
+      {
+        "cpu": 1,
+        "core": 1,
+        "socket": 0,
+        "numa_node": 0
+      },
+      {
+        "cpu": 2,
+        "core": 2,
+        "socket": 0,
+        "numa_node": 0
+      },
+      {
+        "cpu": 3,
+        "core": 3,
+        "socket": 0,
+        "numa_node": 0
+      }
+    ],
+    "total_cores": 4,
+    "numa_nodes": [
+      {
+        "node": 0,
+        "cpus": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  "block_devices": [
+    {
+      "name": "sda",
+      "size_gb": 465.76,
+      "device": "/dev/sda",
+      "partitions": [
+        {
+          "name": "sda1",
+          "size_gb": 465.76,
+          "mount_point": "/",
+          "total_gb": 457.38,
+          "used_gb": 159.73,
+          "available_gb": 274.34
+        }
+      ],
+      "type": "SSD/NVMe",
+      "hw_sector_size": 512,
+      "physical_block_size": 512,
+      "scheduler": "mq-deadline"
+    }
+  ],
+  "memory": {
+    "total_mb": 15865.66,
+    "available_mb": 12351.76,
+    "hugepages_total": 0,
+    "hugepages_free": 0,
+    "hugepage_size_kb": 2048
+  },
+  "limits": {
+    "socket_rcv_buffer_max_bytes": 50000000,
+    "socket_snd_buffer_max_bytes": 1048576,
+    "pipe_max_size_bytes": 1048576
+  }
+}
